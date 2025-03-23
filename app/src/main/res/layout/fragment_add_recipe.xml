@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
     tools:context=".AddRecipeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="Dodaj przepis"
+        android:textSize="30sp" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="800px"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Podaj nazwę przepisu"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/ingredientsEditText"
+        android:layout_width="800px"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Podaj składniki"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/instructionEditText"
+        android:layout_width="800px"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Podaj instrukcje"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <RatingBar
+        android:id="@+id/recipeRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="3"
+        android:stepSize="0.5" />
+
+    <Button
+        android:id="@+id/add_recipe_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Dodaj przepis" />
+
+</LinearLayout>
