@@ -1,11 +1,16 @@
 package com.example.mycookbook
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +26,9 @@ class RecipeListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var recipeAdapter: RecipeAdapter
+    private var recipeList: MutableList<Recipe> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +48,18 @@ class RecipeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val addRecipeButton: Button =view.findViewById(R.id.add_recipe_button)
 
+        val recyclerView: RecyclerView = view.findViewById(R.id.recipeRecyclerView)
+        val sharedPreferences = activity?.getSharedPreferences("recipes", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val recipeListJson = sharedPreferences?.getString("recipe_list", "[]")
+        val type = object : TypeToken<MutableList<Recipe>>() {}.type
+        recipeList = gson.fromJson(recipeListJson, type) ?: mutableListOf()
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = recipeAdapter
+
+
+        val addRecipeButton: Button =view.findViewById(R.id.add_recipe_button)
         addRecipeButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container, AddRecipeFragment()).addToBackStack(null).commit()
         }
